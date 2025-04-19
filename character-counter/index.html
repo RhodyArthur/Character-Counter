@@ -16,8 +16,8 @@
         </div>
 
         <button class="theme-switcher">
-            <img src="assets/images/icon-moon.svg" alt="moon icon">
-            <img src="assets/images/icon-sun.svg" class="hidden" alt="sun icon">
+            <img src="assets/images/icon-moon.svg" alt="moon icon" class="moon">
+            <img src="assets/images/icon-sun.svg" class="sun hidden" alt="sun icon">
         </div>
     </header>
 
@@ -45,8 +45,31 @@
 
     </section>
 
-    <section class="content">
+    <section class="content flex-column">
+
+        <div class="card-container flex-column">
+            <div class="card flex-column character">
+                <h3 class="number">278</h3>
+                <p>Total Characters</p>
+            </div>
+
+            <div class="card flex-column word">
+                <h3 class="number">278</h3>
+                <p>Word Count</p>
+            </div>
+
+            <div class="card flex-column sentence">
+                <h3 class="number">278</h3>
+                <p>Sentence Count</p>
+            </div>
+        </div>
+
+        <div class="letter-density flex-column">
+            <h2>Letter Density</h2>
+            <p>No characters found. Start typing to see letter density.</p>
+        </div>
 
     </section>
+    <script src="script.js"></script>
 </body>
 </html>

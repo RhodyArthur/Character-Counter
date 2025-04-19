@@ -127,6 +127,7 @@ header .theme-switcher {
 h1 {
     color: var(--title);
     text-align: center;
+    font-size: var(--text-preset-1-mobile);
 }
 
 .text-content {
@@ -202,3 +203,56 @@ input[type="checkbox"]:checked::after {
     display: block;
 }
   
+
+.content {
+    gap: 1.5rem;
+}
+
+.card-container {
+    gap: 1rem;
+}
+
+.card-container .card {
+    padding: 1.25rem;
+    gap: 0.5rem;
+    border-radius: var(--radius-12);
+    height: 130px;
+    color: var(--neutral900);
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.card-container .card h3 {
+    font-size: var(--text-preset-1-mobile);
+} 
+
+.card-container .card p {
+    font-size: var(--text-preset-3);
+    font-weight: 400;
+}
+
+.character {
+    background-color: var(--blue400);
+    background-image: url(assets/images/pattern-character-count.svg);
+    
+}
+.word {
+    background-color: var(--yellow500);
+    background-image: url(assets/images/pattern-word-count.svg);
+}
+.sentence {
+    background-color: var(--orange500);
+    background-image: url(assets/images/pattern-sentence-count.svg);
+}
+
+.letter-density {
+    gap: 1.25rem;
+}
+
+.letter-density h2 {
+    font-size: var(--text-preset-2);
+}
+
+.letter-density p {
+    font-size: var(--text-preset-4);
+}
