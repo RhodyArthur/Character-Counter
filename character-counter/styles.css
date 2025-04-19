@@ -49,6 +49,25 @@
     --radius-24: 1.5rem;
     --radius-full: 999px;
 
+    /* light-theme */
+    --main-bg: var(--neutral0);
+    --text-color: var(--neutral900);
+    --input-textColor: var(--neutral700);
+    --switcher-bg: var(--neutral100);
+    --title: var(--neutral900);
+    --textarea-bg: var(--neutral100);
+    --textarea-border: var(--neutral200);
+   
+}
+
+body.dark-theme {
+    --main-bg: var(--neutral900);
+    --text-color: var(--neutral200);
+    --input-textColor: var(--neutral200);
+    --switcher-bg: var(--neutral700);
+    --title: var(--neutral100);
+    --textarea-bg: var(--neutral800);
+    --textarea-border: var(--neutral700);
 }
 
 *, ::before, ::after {
@@ -56,3 +75,130 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+button, input {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-500);
+    padding: var(--spacing-200);
+    padding-bottom: var(--spacing-400);
+    font-family: "DM Sans", sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+header .logo h2 {
+    display: flex;
+    font-size: 1.125rem;
+}
+
+header .theme-switcher {
+    background-color: var(--switcher-bg);
+    border-radius: var(--radius-6);
+    padding: var(--spacing-075);
+    outline: none;
+    border: none;
+}
+
+h1 {
+    color: var(--title);
+    text-align: center;
+}
+
+.text-content {
+    gap: 1rem;
+}
+
+textarea {
+    padding: 1rem;
+    border-radius: var(--radius-12);
+    height: 200px;
+    resize: none;
+    font-size: var(--text-preset-3);
+    background-color: var(--textarea-bg);
+    border: 2px solid var(--textarea-border);
+    color: var(--input-textColor);
+}
+
+textarea:focus,
+textarea:active,
+textarea:hover {
+    border: 2px solid var(--blue500) !important;
+}
+
+.text-content .text-actions, .text-content .text-actions .check-wrapper {
+    gap: 0.75rem;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--radius-4);
+    border: 1px solid var(--text-color);
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f00c";
+    font-size: 0.75rem;
+    color: var(--neutral0);
+    display: none;
+}
+
+
+input[type="checkbox"]:hover,
+input[type="checkbox"]:focus {
+  border-color: var(--blue400);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--blue400);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--blue400);
+    border-color: var(--blue400);
+}
+  
+input[type="checkbox"]:checked::after {
+    display: block;
+}
+  

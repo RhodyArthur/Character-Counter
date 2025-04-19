@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Counter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="assets/images/logo.svg" alt="main logo">
+            <h2>Character Counter</h2>
+        </div>
+
+        <button class="theme-switcher">
+            <img src="assets/images/icon-moon.svg" alt="moon icon">
+            <img src="assets/images/icon-sun.svg" class="hidden" alt="sun icon">
+        </div>
+    </header>
+
+    <h1>Analyze your text in real-time.</h1>
+
+    <section class="text-content flex-column">
+        <textarea name="message" id="message"></textarea>
+
+        <div class="text-actions flex-column">
+            <div class="check-wrapper flex-column">
+
+                <div class="custom-checkbox">
+                    <input type="checkbox"  id="exclude-spaces">
+                    <label for="exclude-spaces">Exclude Spaces</label>
+                </div>
     
+                <div class="custom-checkbox">
+                    <input type="checkbox"  id="character-limit">
+                    <label for="character-limit">Set Character Limit</label>
+                </div>
+            </div>
+
+            <p>Approx. reading time: &lt1 minute</p>
+        </div>
+
+    </section>
+
+    <section class="content">
+
+    </section>
 </body>
 </html>
