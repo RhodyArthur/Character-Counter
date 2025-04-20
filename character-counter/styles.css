@@ -162,12 +162,14 @@ textarea {
     border: 2px solid var(--textarea-border);
     color: var(--input-textColor);
     width: 100%;
+    outline: none;
 }
 
 textarea:focus,
 textarea:active,
 textarea:hover {
     border: 2px solid var(--blue500) !important;
+    box-shadow: 0 0 10px 0px var(--blue-500);
 }
 
 
@@ -229,6 +231,7 @@ input[type="checkbox"]:checked::after {
     width: 55px;
     border: 1px solid var(--neutral600);
     background-color: var(--limit);
+    outline: none;
 }
 
 #limit:focus {
@@ -248,6 +251,7 @@ input[type="checkbox"]:checked::after {
     border-radius: var(--radius-12);
     height: 130px;
     color: var(--neutral900);
+    background-size: 150px 150px;
     background-position: right;
     background-repeat: no-repeat;
 }
@@ -293,4 +297,43 @@ input[type="checkbox"]:checked::after {
 
 .warning {
     border: 2px solid var(--orange500);
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        padding: 1.125rem 2rem 5rem;
+    }
+
+    h1 {
+        display: flex;
+        align-self: center;
+        width: 510px;
+        font-size: var(--text-preset-1);
+    }
+
+    .text-content .text-actions, .text-content .check-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .text-content .check-wrapper {
+        gap: 1.5rem;
+    }
+
+    .card-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .card-container .card {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+        margin: 0 auto;
+        max-width: 61.875rem;
+    }
+    
 }
