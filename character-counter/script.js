@@ -16,10 +16,11 @@ const estimatedTimeEl = document.querySelector('.approx-time');
 
 
 themeEl.addEventListener('click', toggleTheme);
+textEl.addEventListener('beforeinput', handleCharacterLimit);
 textEl.addEventListener('input', updateCount);
 excludingSpacesEl.addEventListener('change', updateCount);
-limitEl.addEventListener('input', characterLimit)
-limitCheckbox.addEventListener('change', characterLimit);
+limitEl.addEventListener('input', handleCharacterLimit)
+limitCheckbox.addEventListener('change', handleCharacterLimit);
 
 function toggleTheme() {
     if (body.classList.contains('dark-theme')) {
@@ -35,7 +36,7 @@ function toggleTheme() {
 }
 
 function getCharacterCount(text) {
-    const textContent = text.value || text;
+    const textContent = text.value;
     return excludingSpacesEl.checked ?  textContent.replace(/\s/g, '').length : textContent.length;
 }
 
@@ -68,12 +69,11 @@ function updateCount() {
 
     estimatedTimeEl.textContent = `Approx. reading time: < ${getReadingTime(textEl)} minute(s)`
 
-    characterLimit()
+    // handleCharacterLimit()
 }
 
 
-
-function characterLimit() {
+function handleCharacterLimit(e=null) {
     limitEl.classList.toggle('visibility', !limitCheckbox.checked);
 
     if (!limitCheckbox.checked) {
@@ -90,14 +90,20 @@ function characterLimit() {
 
     const currentCount = getCharacterCount(textEl);
 
+    if (e && e.type === 'beforeinput' && currentCount > characterLimit && e.inputType.startsWith('insert')) {
+        e.preventDefault();
+        warningTextEl.textContent = `Limit reached! Your text exceeds ${characterLimit} characters.`;
+        limitWarningEl.classList.remove('hidden');
+        textEl.classList.add('warning');
+        return;
+    }
+
     if (currentCount > characterLimit) {
-        textEl.readOnly = true;
         textEl.classList.add('warning');
         warningTextEl.textContent = `Limit reached! Your text exceeds ${characterLimit} characters.`;
         limitWarningEl.classList.remove('hidden');
 
     } else {
-        textEl.readOnly = false;
         textEl.classList.remove('warning');
         limitWarningEl.classList.add('hidden');
     }
