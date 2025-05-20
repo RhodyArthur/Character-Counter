@@ -12,6 +12,14 @@ const limitEl = document.getElementById('limit');
 const limitWarningEl = document.getElementById('limit-warning');
 const warningTextEl = document.getElementById('warning-text');
 const estimatedTimeEl = document.querySelector('.approx-time');
+const densityEl = document.querySelector('.letter-density');
+const defaultEl = document.querySelector('.default-text');
+
+const densityContainer = document.createElement('div');
+densityContainer.classList.add('chart-container');
+densityEl.appendChild(densityContainer);
+let isExpanded = false;
+
 
 
 
@@ -59,21 +67,25 @@ function getReadingTime(text) {
 
 function updateCount() {
     const count = getCharacterCount(textEl);
-    characterCountEl.textContent =  count < 10 ? `0${count}`: count;
+    characterCountEl.textContent =  String(count).padStart(2, "0");
+    
 
     const wordCount = getWordCount(textEl)
-    wordCountEl.textContent = wordCount < 10 ? `0${wordCount}` : wordCount;
+    wordCountEl.textContent = String(wordCount).padStart(2, "0");
 
     const sentenceCount = getSentenceCount(textEl)
-    sentenceCountEl.textContent = sentenceCount < 10 ? `0${sentenceCount}` : sentenceCount;
+    sentenceCountEl.textContent = String(sentenceCount).padStart(2, "0");
 
     estimatedTimeEl.textContent = `Approx. reading time: < ${getReadingTime(textEl)} minute(s)`
 
-    // handleCharacterLimit()
+    updateChart()
 }
 
 
 function handleCharacterLimit(e=null) {
+    const characterLimit = parseInt(limitEl.value);
+    const currentCount = getCharacterCount(textEl);
+
     limitEl.classList.toggle('visibility', !limitCheckbox.checked);
 
     if (!limitCheckbox.checked) {
@@ -82,19 +94,16 @@ function handleCharacterLimit(e=null) {
         return;
     }
 
-    const characterLimit = parseInt(limitEl.value);
     if (isNaN(characterLimit)) {
         limitWarningEl.classList.add('hidden');
         return;
     }
 
-    const currentCount = getCharacterCount(textEl);
-
     if (e && e.type === 'beforeinput' && currentCount > characterLimit && e.inputType.startsWith('insert')) {
         e.preventDefault();
+        textEl.classList.add('warning');
         warningTextEl.textContent = `Limit reached! Your text exceeds ${characterLimit} characters.`;
         limitWarningEl.classList.remove('hidden');
-        textEl.classList.add('warning');
         return;
     }
 
@@ -109,3 +118,74 @@ function handleCharacterLimit(e=null) {
     }
 }
 
+
+function getCharFrequency(text) {
+    const textContent = text.value;
+    let freq = {};
+
+    for (let char of textContent) {
+        if (char !== ' ') {
+            freq[char] = (freq[char] || 0) + 1
+        }
+    }
+    return freq;
+}
+
+function getCharacterProgress(value, text) {
+    return (value/getCharacterCount(text) * 100).toFixed(2)
+}
+
+function updateChart() {
+    const freq = getCharFrequency(textEl);
+    const entries = Object.entries(freq);
+    
+    if (entries.length > 0) {
+        defaultEl.classList.add('hidden')
+
+        let html = ``
+
+        const visibleEntries = isExpanded ? entries : entries.slice(0,5)
+
+        for (let [key, value] of visibleEntries) {
+
+            html += 
+            `
+                <div class="chart">
+                    <p class="char">${key.toUpperCase()}</p>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: ${getCharacterProgress(value, textEl)}"></div>
+                    </div>
+
+                    <div class="value">
+                        <p>${value} </p>
+                        <span>(${getCharacterProgress(value, textEl)}%)</span>
+                    </div>
+                </div>
+            `
+        }
+
+        if (entries.length > 5) {
+
+            html += ` <div class="toggle-button">
+                        <button id="toggle-chart">${isExpanded ? 'See less' : 'See more'}</button>
+                      </div>`
+        }
+        
+        densityContainer.innerHTML = html
+
+        const toggleChartBtn = document.getElementById('toggle-chart');
+        if (toggleChartBtn) {
+
+            toggleChartBtn.addEventListener('click', () => {
+                isExpanded = !isExpanded
+                updateChart()
+            })
+        }
+        
+    }
+    else {
+        defaultEl.classList.remove('hidden')
+        densityContainer.innerHTML = ''
+    }
+}

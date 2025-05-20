@@ -299,6 +299,59 @@ input[type="checkbox"]:checked::after {
     border: 2px solid var(--orange500);
 }
 
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.chart {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+}
+
+.progress-container {
+    width: 100%;
+    border-radius: 999px;
+    height: 0.75rem;
+    background-color: var(--textarea-bg);
+    position: relative;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    border-radius: 999px;
+    background-color: var(--blue400);
+    position: absolute;
+    transition: width 0.3s ease;
+}
+
+.char {
+    width: 1.25rem;
+    text-align: left;
+    font-size: var(--text-preset-4);
+}
+
+.value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: right;
+    flex-shrink: 0;
+    width: 87px;
+    font-size: var(--text-preset-4);
+}
+
+#toggle-chart {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: var(--text-preset-3);
+}
+
 @media screen and (min-width: 768px) {
     body {
         padding: 1.125rem 2rem 5rem;
