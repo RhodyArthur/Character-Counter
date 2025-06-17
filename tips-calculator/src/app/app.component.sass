@@ -1,0 +1,14 @@
+@import '../styles/_variables'
+@import '../styles/_mixin'
+
+main
+    @include flex-containter(flex, null, null, column)
+    gap: 2.5rem
+    background-color: $bg
+    height: 100dvh
+
+    h2
+        @include flex-containter(flex, center, null, row)
+        padding-block: 3.125rem
+        letter-spacing: 4px
+        color: $text-green

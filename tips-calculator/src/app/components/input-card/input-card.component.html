@@ -1,0 +1,23 @@
+<main>
+    <div class="input-field">
+        <label for="bill"></label>
+        <input type="number" name="bill" id="bill" [(ngModel)]="inputValue">
+    </div>
+
+    <section>
+        <p>Select Tip %</p>
+
+
+        <div class="button-group">
+            <!-- @for (button of tipsButton; track $index) {
+                    <app-button [color]="button.color" [label]="button.label"/>
+            } -->
+            <input type="text" placeholder="Custom" class="custom">
+        </div>
+    </section>
+
+    <div class="input-field">
+        <label for="people"></label>
+        <input type="number" name="people" id="people" [(ngModel)]="numberOfPeople">
+    </div>
+</main>
